@@ -22,22 +22,15 @@ class MainViewController: UIViewController {
 
         view.backgroundColor = .systemBackground
 
+        // TODO: Add search bar and segmented control to enable filtering
         setupTableView()
         setupConstraints()
         populateTable()
     }
 
     private func populateTable() {
-        NetworkManager.shared.fetchAllDigimon { digimons, error in
-            if let error {
-                print("Error \(error)") // TODO: Add error screen
-            }
-
-            if let digimons {
-                self.digimons = digimons
-                self.digimonTableView.reloadData()
-            }
-        }
+        DataManager.shared.delegate = self
+        DataManager.shared.getAllDigimon()
     }
 
     private func setupTableView() {
@@ -70,5 +63,20 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
 
         cell.configureCell(with: digimons[indexPath.row])
         return cell
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // TODO: Add details screen
+    }
+}
+
+extension MainViewController: MainViewProtocol {
+    func showDigimons(_ digimons: [Digimon]) {
+        self.digimons = digimons
+        self.digimonTableView.reloadData()
+    }
+
+    func showErrorScreen() {
+        print("Error")
     }
 }

@@ -8,6 +8,11 @@
 import UIKit
 
 class DigimonTableViewCell: UITableViewCell {
+    private struct Constants {
+        static let sidesMargin: CGFloat = 15
+        static let imageSize: CGFloat = 100
+    }
+
     private var digimonImage: UIImageView = {
         let imageView = UIImageView()
         imageView.clipsToBounds = true
@@ -17,7 +22,7 @@ class DigimonTableViewCell: UITableViewCell {
         return imageView
     }()
 
-    private var nameLabel: UILabel = {
+    private var nameLabel: UILabel = { // TODO: Add a better font
         let label = UILabel()
         label.lineBreakMode = .byTruncatingTail
         label.numberOfLines = 1
@@ -73,16 +78,16 @@ class DigimonTableViewCell: UITableViewCell {
     }
 
     private func setupConstraints() {
-        let digimonImageHeightConstraint = digimonImage.heightAnchor.constraint(equalToConstant: 100)
+        let digimonImageHeightConstraint = digimonImage.heightAnchor.constraint(equalToConstant: Constants.imageSize)
         digimonImageHeightConstraint.priority = .defaultHigh
 
         NSLayoutConstraint.activate([
             stackView.topAnchor.constraint(equalTo: topAnchor),
             stackView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
-            stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
+            stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.sidesMargin),
+            stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.sidesMargin),
 
-            digimonImage.widthAnchor.constraint(equalToConstant: 100),
+            digimonImage.widthAnchor.constraint(equalToConstant: Constants.imageSize),
             digimonImageHeightConstraint,
         ])
     }

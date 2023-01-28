@@ -14,6 +14,7 @@
 		CDF99D602984554000F96828 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDF99D5F2984554000F96828 /* LaunchScreen.storyboard */; };
 		CDF99D6229845AE800F96828 /* DigimonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF99D6129845AE800F96828 /* DigimonTableViewCell.swift */; };
 		CDF99D642984885600F96828 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF99D632984885600F96828 /* NetworkManager.swift */; };
+		CDF99D682984B51400F96828 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF99D672984B51400F96828 /* DataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		CDF99D5F2984554000F96828 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CDF99D6129845AE800F96828 /* DigimonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DigimonTableViewCell.swift; sourceTree = "<group>"; };
 		CDF99D632984885600F96828 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		CDF99D672984B51400F96828 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,8 +61,8 @@
 			isa = PBXGroup;
 			children = (
 				CD24B5CA297F7E210030259A /* Model */,
-				CD24B5C9297F7DD00030259A /* Network */,
 				CD24B5CF297F82420030259A /* Resources */,
+				CDF99D652984B4AB00F96828 /* Services */,
 				CD24B5CD297F80D70030259A /* SupportingFiles */,
 				CD24B5CE297F822B0030259A /* View */,
 			);
@@ -108,6 +110,23 @@
 				CD24B5BE297F7D230030259A /* Assets.xcassets */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		CDF99D652984B4AB00F96828 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				CDF99D662984B4CB00F96828 /* Data */,
+				CD24B5C9297F7DD00030259A /* Network */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		CDF99D662984B4CB00F96828 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				CDF99D672984B51400F96828 /* DataManager.swift */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -181,6 +200,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CD24B5B6297F7D210030259A /* AppDelegate.swift in Sources */,
+				CDF99D682984B51400F96828 /* DataManager.swift in Sources */,
 				CD24B5CC297F7EA80030259A /* MainViewController.swift in Sources */,
 				CDF99D642984885600F96828 /* NetworkManager.swift in Sources */,
 				CD24B5D1297F89200030259A /* Digimon.swift in Sources */,

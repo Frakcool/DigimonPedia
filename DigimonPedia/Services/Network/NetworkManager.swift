@@ -33,7 +33,7 @@ enum DigimonEndpoint {
             case .nameSearch(name: let name):
                 return "/name/\(name)"
             case .levelSearch(level: let level):
-                return "level/\(level)"
+                return "/level/\(level)"
             case .digimonImage(imageUrl: let imageURL):
                 return imageURL
         }
@@ -45,7 +45,7 @@ enum NetworkError: Error {
     case invalidData
 }
 
-class NetworkManager {
+struct NetworkManager {
     static let shared = NetworkManager()
 
     private init() {}
