@@ -33,7 +33,7 @@ enum DigimonEndpoint {
             case .nameSearch(name: let name):
                 return "/name/\(name)"
             case .levelSearch(level: let level):
-                return "/level/\(level)"
+                return "/level/\(level.percentageEncoded())"
             case .digimonImage(imageUrl: let imageURL):
                 return imageURL
         }
@@ -97,7 +97,9 @@ struct NetworkManager {
         let session = URLSession(configuration: .default)
         let dataTask = session.dataTask(with: request) { (data, response, error) in
             guard let data else {
-                completion?(nil, error)
+                DispatchQueue.main.async {
+                    completion?(nil, error)
+                }
                 return
             }
 
@@ -110,7 +112,9 @@ struct NetworkManager {
                     completion?(decodedResponse, nil)
                 }
             } else {
-                completion?(nil, NetworkError.invalidData)
+                DispatchQueue.main.async {
+                    completion?(nil, NetworkError.invalidData)
+                }
             }
         }
         dataTask.resume()
@@ -118,5 +122,11 @@ struct NetworkManager {
 
     private func isImage(mimeType: String?) -> Bool {
         mimeType == "image/jpeg"
+    }
+}
+
+extension String {
+    func percentageEncoded() -> String {
+        return self.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? self
     }
 }

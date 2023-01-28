@@ -27,7 +27,18 @@ class DigimonTableViewCell: UITableViewCell {
         label.lineBreakMode = .byTruncatingTail
         label.numberOfLines = 1
         label.textAlignment = .left
-        label.font = UIFont(name: "Futura", size: 20)
+        label.font = UIFont(name: "Futura", size: 24)
+        label.adjustsFontSizeToFitWidth = false
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+
+    private var levelLabel: UILabel = {
+        let label = UILabel()
+        label.lineBreakMode = .byTruncatingTail
+        label.numberOfLines = 1
+        label.textAlignment = .left
+        label.font = UIFont(name: "Futura", size: 16)
         label.adjustsFontSizeToFitWidth = false
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -39,6 +50,16 @@ class DigimonTableViewCell: UITableViewCell {
         stackView.alignment = .fill
         stackView.distribution = .fill
         stackView.spacing = 40
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+
+    private let textStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.alignment = .fill
+        stackView.distribution = .fill
+        stackView.spacing = 0
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -55,6 +76,7 @@ class DigimonTableViewCell: UITableViewCell {
 
     func configureCell(with digimon: Digimon) {
         nameLabel.text = digimon.name
+        levelLabel.text = digimon.level
         updateImage(of: digimon)
     }
 
@@ -70,10 +92,16 @@ class DigimonTableViewCell: UITableViewCell {
         }
     }
 
+    private func setupTextStackView() {
+        stackView.addArrangedSubview(textStackView)
+        textStackView.addArrangedSubview(nameLabel)
+        textStackView.addArrangedSubview(levelLabel)
+    }
+
     private func setupViews() {
         addSubview(stackView)
         stackView.addArrangedSubview(digimonImage)
-        stackView.addArrangedSubview(nameLabel)
+        setupTextStackView()
 
         setupConstraints()
     }
