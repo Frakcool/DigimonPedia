@@ -8,22 +8,24 @@
 
 /* Begin PBXBuildFile section */
 		CD24B5B6297F7D210030259A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD24B5B5297F7D210030259A /* AppDelegate.swift */; };
-		CD24B5B8297F7D210030259A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD24B5B7297F7D210030259A /* SceneDelegate.swift */; };
-		CD24B5BA297F7D210030259A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD24B5B9297F7D210030259A /* ViewController.swift */; };
-		CD24B5BD297F7D210030259A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD24B5BB297F7D210030259A /* Main.storyboard */; };
 		CD24B5BF297F7D230030259A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD24B5BE297F7D230030259A /* Assets.xcassets */; };
-		CD24B5C2297F7D230030259A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD24B5C0297F7D230030259A /* LaunchScreen.storyboard */; };
+		CD24B5CC297F7EA80030259A /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD24B5CB297F7EA80030259A /* MainViewController.swift */; };
+		CD24B5D1297F89200030259A /* Digimon.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD24B5D0297F89200030259A /* Digimon.swift */; };
+		CDF99D602984554000F96828 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDF99D5F2984554000F96828 /* LaunchScreen.storyboard */; };
+		CDF99D6229845AE800F96828 /* DigimonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF99D6129845AE800F96828 /* DigimonTableViewCell.swift */; };
+		CDF99D642984885600F96828 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF99D632984885600F96828 /* NetworkManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		CD24B5B2297F7D210030259A /* DigimonPedia.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DigimonPedia.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD24B5B5297F7D210030259A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		CD24B5B7297F7D210030259A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		CD24B5B9297F7D210030259A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		CD24B5BC297F7D210030259A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CD24B5BE297F7D230030259A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		CD24B5C1297F7D230030259A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CD24B5C3297F7D230030259A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CD24B5CB297F7EA80030259A /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		CD24B5D0297F89200030259A /* Digimon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Digimon.swift; sourceTree = "<group>"; };
+		CDF99D5F2984554000F96828 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		CDF99D6129845AE800F96828 /* DigimonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DigimonTableViewCell.swift; sourceTree = "<group>"; };
+		CDF99D632984885600F96828 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +58,56 @@
 		CD24B5B4297F7D210030259A /* DigimonPedia */ = {
 			isa = PBXGroup;
 			children = (
-				CD24B5B5297F7D210030259A /* AppDelegate.swift */,
-				CD24B5B7297F7D210030259A /* SceneDelegate.swift */,
-				CD24B5B9297F7D210030259A /* ViewController.swift */,
-				CD24B5BB297F7D210030259A /* Main.storyboard */,
-				CD24B5BE297F7D230030259A /* Assets.xcassets */,
-				CD24B5C0297F7D230030259A /* LaunchScreen.storyboard */,
-				CD24B5C3297F7D230030259A /* Info.plist */,
+				CD24B5CA297F7E210030259A /* Model */,
+				CD24B5C9297F7DD00030259A /* Network */,
+				CD24B5CF297F82420030259A /* Resources */,
+				CD24B5CD297F80D70030259A /* SupportingFiles */,
+				CD24B5CE297F822B0030259A /* View */,
 			);
 			path = DigimonPedia;
+			sourceTree = "<group>";
+		};
+		CD24B5C9297F7DD00030259A /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				CDF99D632984885600F96828 /* NetworkManager.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		CD24B5CA297F7E210030259A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				CD24B5D0297F89200030259A /* Digimon.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		CD24B5CD297F80D70030259A /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				CD24B5C3297F7D230030259A /* Info.plist */,
+				CD24B5B5297F7D210030259A /* AppDelegate.swift */,
+				CDF99D5F2984554000F96828 /* LaunchScreen.storyboard */,
+			);
+			path = SupportingFiles;
+			sourceTree = "<group>";
+		};
+		CD24B5CE297F822B0030259A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				CD24B5CB297F7EA80030259A /* MainViewController.swift */,
+				CDF99D6129845AE800F96828 /* DigimonTableViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		CD24B5CF297F82420030259A /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				CD24B5BE297F7D230030259A /* Assets.xcassets */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -125,9 +168,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CD24B5C2297F7D230030259A /* LaunchScreen.storyboard in Resources */,
+				CDF99D602984554000F96828 /* LaunchScreen.storyboard in Resources */,
 				CD24B5BF297F7D230030259A /* Assets.xcassets in Resources */,
-				CD24B5BD297F7D210030259A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,32 +180,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CD24B5BA297F7D210030259A /* ViewController.swift in Sources */,
 				CD24B5B6297F7D210030259A /* AppDelegate.swift in Sources */,
-				CD24B5B8297F7D210030259A /* SceneDelegate.swift in Sources */,
+				CD24B5CC297F7EA80030259A /* MainViewController.swift in Sources */,
+				CDF99D642984885600F96828 /* NetworkManager.swift in Sources */,
+				CD24B5D1297F89200030259A /* Digimon.swift in Sources */,
+				CDF99D6229845AE800F96828 /* DigimonTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		CD24B5BB297F7D210030259A /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CD24B5BC297F7D210030259A /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		CD24B5C0297F7D230030259A /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CD24B5C1297F7D230030259A /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		CD24B5C4297F7D230030259A /* Debug */ = {
@@ -288,10 +313,9 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = DigimonPedia/Info.plist;
+				INFOPLIST_FILE = DigimonPedia/SupportingFiles/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UILaunchStoryboardName = DigimonPedia/SupportingFiles/LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -315,10 +339,8 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = DigimonPedia/Info.plist;
+				INFOPLIST_FILE = DigimonPedia/SupportingFiles/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
