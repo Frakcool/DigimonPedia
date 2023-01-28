@@ -55,7 +55,7 @@ class DigimonTableViewCell: UITableViewCell {
     private func updateImage(of digimon: Digimon) {
         NetworkManager.shared.getImage(from: digimon.img) { data, error in
             if let error {
-                print("Error \(error)")
+                print("Error \(error)") // TODO: Handle no image case
             }
 
             if let data {
@@ -73,16 +73,16 @@ class DigimonTableViewCell: UITableViewCell {
     }
 
     private func setupConstraints() {
-        let digimonImageHeightConstraint = digimonImage.heightAnchor.constraint(equalToConstant: 75)
+        let digimonImageHeightConstraint = digimonImage.heightAnchor.constraint(equalToConstant: 100)
         digimonImageHeightConstraint.priority = .defaultHigh
 
         NSLayoutConstraint.activate([
             stackView.topAnchor.constraint(equalTo: topAnchor),
             stackView.bottomAnchor.constraint(equalTo: bottomAnchor),
             stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
-            stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 15),
+            stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
 
-            digimonImage.widthAnchor.constraint(equalToConstant: 75),
+            digimonImage.widthAnchor.constraint(equalToConstant: 100),
             digimonImageHeightConstraint,
         ])
     }

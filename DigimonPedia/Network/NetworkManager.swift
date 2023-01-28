@@ -15,9 +15,9 @@ enum DigimonEndpoint {
 
     var endpointURL: String {
         switch self {
-            case .digimon, .nameSearch(name: _), .levelSearch(level: _):
+            case .digimon, .nameSearch, .levelSearch:
                 return apiURLString + path
-            case .digimonImage(imageUrl: _):
+            case .digimonImage:
                 return path
         }
     }
@@ -78,11 +78,11 @@ class NetworkManager {
     }
 
     public func getImage(from url: String, completion: DigimonImageCompletionClosure?) {
-        guard let request = createImageRequest(for: .digimonImage(imageUrl: url)) else {
+        guard let request = createRequest(for: .digimonImage(imageUrl: url)) else {
             completion?(nil, NetworkError.invalidUrl)
             return
         }
-        downloadImage(request: request, completion: completion)
+        executeRequest(request: request, completion: completion)
     }
 
     private func createRequest(for digimonEndpoint: DigimonEndpoint) -> URLRequest? {
@@ -93,14 +93,6 @@ class NetworkManager {
         return request
     }
 
-    private func createImageRequest(for digimonEndpoint: DigimonEndpoint) -> URLRequest? {
-        guard let url = URL(string: digimonEndpoint.endpointURL) else { return nil }
-        var request = URLRequest(url: url)
-        request.httpMethod = "GET"
-//        request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
-        return request
-    }
-
     private func executeRequest<T: Codable>(request: URLRequest, completion: ((T?, Error?) -> Void)?) {
         let session = URLSession(configuration: .default)
         let dataTask = session.dataTask(with: request) { (data, response, error) in
@@ -108,7 +100,12 @@ class NetworkManager {
                 completion?(nil, error)
                 return
             }
-            if let decodedResponse = try? JSONDecoder().decode(T.self, from: data) {
+
+            if self.isImage(mimeType: response?.mimeType) {
+                DispatchQueue.main.async {
+                    completion?(data as? T, nil)
+                }
+            } else if let decodedResponse = try? JSONDecoder().decode(T.self, from: data) {
                 DispatchQueue.main.async {
                     completion?(decodedResponse, nil)
                 }
@@ -119,22 +116,7 @@ class NetworkManager {
         dataTask.resume()
     }
 
-    private func downloadImage(request: URLRequest, completion: ((Data?, Error?) -> Void)?) {
-        let session = URLSession(configuration: .default)
-        let dataTask = session.dataTask(with: request) { (data, response, error) in
-            guard let data else {
-                completion?(nil, error)
-                return
-            }
-
-            if !data.isEmpty {
-                DispatchQueue.main.async {
-                    completion?(data, nil)
-                }
-            } else {
-                completion?(nil, NetworkError.invalidData)
-            }
-        }
-        dataTask.resume()
+    private func isImage(mimeType: String?) -> Bool {
+        mimeType == "image/jpeg"
     }
 }

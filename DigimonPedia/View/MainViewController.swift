@@ -30,7 +30,7 @@ class MainViewController: UIViewController {
     private func populateTable() {
         NetworkManager.shared.fetchAllDigimon { digimons, error in
             if let error {
-                print("Error \(error)")
+                print("Error \(error)") // TODO: Add error screen
             }
 
             if let digimons {
