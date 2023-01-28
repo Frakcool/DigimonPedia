@@ -14,8 +14,10 @@
 		CDF99D602984554000F96828 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDF99D5F2984554000F96828 /* LaunchScreen.storyboard */; };
 		CDF99D6229845AE800F96828 /* DigimonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF99D6129845AE800F96828 /* DigimonTableViewCell.swift */; };
 		CDF99D642984885600F96828 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF99D632984885600F96828 /* NetworkManager.swift */; };
-		CDF99D682984B51400F96828 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF99D672984B51400F96828 /* DataManager.swift */; };
+		CDF99D682984B51400F96828 /* MainViewDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF99D672984B51400F96828 /* MainViewDataManager.swift */; };
 		CDF99D6A2984E94A00F96828 /* DigimonNotFoundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF99D692984E94A00F96828 /* DigimonNotFoundView.swift */; };
+		CDF99D6D2985C8AB00F96828 /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF99D6C2985C8AB00F96828 /* CacheManager.swift */; };
+		CDF99D6F2985D92200F96828 /* DigimonTableViewCellDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF99D6E2985D92200F96828 /* DigimonTableViewCellDataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,8 +30,10 @@
 		CDF99D5F2984554000F96828 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CDF99D6129845AE800F96828 /* DigimonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DigimonTableViewCell.swift; sourceTree = "<group>"; };
 		CDF99D632984885600F96828 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
-		CDF99D672984B51400F96828 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		CDF99D672984B51400F96828 /* MainViewDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewDataManager.swift; sourceTree = "<group>"; };
 		CDF99D692984E94A00F96828 /* DigimonNotFoundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DigimonNotFoundView.swift; sourceTree = "<group>"; };
+		CDF99D6C2985C8AB00F96828 /* CacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheManager.swift; sourceTree = "<group>"; };
+		CDF99D6E2985D92200F96828 /* DigimonTableViewCellDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DigimonTableViewCellDataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +122,7 @@
 		CDF99D652984B4AB00F96828 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				CDF99D6B2985C89C00F96828 /* Cache */,
 				CDF99D662984B4CB00F96828 /* Data */,
 				CD24B5C9297F7DD00030259A /* Network */,
 			);
@@ -127,9 +132,18 @@
 		CDF99D662984B4CB00F96828 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				CDF99D672984B51400F96828 /* DataManager.swift */,
+				CDF99D672984B51400F96828 /* MainViewDataManager.swift */,
+				CDF99D6E2985D92200F96828 /* DigimonTableViewCellDataManager.swift */,
 			);
 			path = Data;
+			sourceTree = "<group>";
+		};
+		CDF99D6B2985C89C00F96828 /* Cache */ = {
+			isa = PBXGroup;
+			children = (
+				CDF99D6C2985C8AB00F96828 /* CacheManager.swift */,
+			);
+			path = Cache;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -203,12 +217,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				CD24B5B6297F7D210030259A /* AppDelegate.swift in Sources */,
-				CDF99D682984B51400F96828 /* DataManager.swift in Sources */,
+				CDF99D682984B51400F96828 /* MainViewDataManager.swift in Sources */,
 				CD24B5CC297F7EA80030259A /* MainViewController.swift in Sources */,
 				CDF99D6A2984E94A00F96828 /* DigimonNotFoundView.swift in Sources */,
+				CDF99D6D2985C8AB00F96828 /* CacheManager.swift in Sources */,
 				CDF99D642984885600F96828 /* NetworkManager.swift in Sources */,
 				CD24B5D1297F89200030259A /* Digimon.swift in Sources */,
 				CDF99D6229845AE800F96828 /* DigimonTableViewCell.swift in Sources */,
+				CDF99D6F2985D92200F96828 /* DigimonTableViewCellDataManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,5 +1,5 @@
 //
-//  DataManager.swift
+//  MainViewDataManager.swift
 //  DigimonPedia
 //
 //  Created by Jesus Sanchez on 27/01/23.
@@ -12,8 +12,8 @@ protocol MainViewProtocol {
     func showErrorScreen()
 }
 
-class DataManager {
-    static var shared = DataManager()
+class MainViewDataManager {
+    static let shared = MainViewDataManager()
 
     var digimons: [Digimon] = []
     var delegate: MainViewProtocol?

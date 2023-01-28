@@ -13,7 +13,7 @@ enum DigimonFilterOption: String, CaseIterable {
 }
 
 class MainViewController: UIViewController {
-    private var dataManager = DataManager.shared
+    private var dataManager = MainViewDataManager.shared
     private var currentFilter: DigimonFilterOption!
     private var digimonNotFoundView = DigimonNotFoundView()
 
