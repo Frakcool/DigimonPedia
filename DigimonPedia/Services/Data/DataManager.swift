@@ -28,4 +28,24 @@ struct DataManager {
             delegate?.showDigimons(digimons)
         }
     }
+
+    func getDigimonsFilteredBy(name: String) {
+        NetworkManager.shared.searchDigimonBy(name: name) { digimons, error in
+            guard error == nil, let digimons else {
+                delegate?.showErrorScreen()
+                return
+            }
+            delegate?.showDigimons(digimons)
+        }
+    }
+
+    func getDigimonsFilteredBy(level: String) {
+        NetworkManager.shared.searchDigimonBy(level: level) { digimons, error in
+            guard error == nil, let digimons else {
+                delegate?.showErrorScreen()
+                return
+            }
+            delegate?.showDigimons(digimons)
+        }
+    }
 }

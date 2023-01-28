@@ -22,11 +22,12 @@ class DigimonTableViewCell: UITableViewCell {
         return imageView
     }()
 
-    private var nameLabel: UILabel = { // TODO: Add a better font
+    private var nameLabel: UILabel = {
         let label = UILabel()
         label.lineBreakMode = .byTruncatingTail
         label.numberOfLines = 1
         label.textAlignment = .left
+        label.font = UIFont(name: "Futura", size: 20)
         label.adjustsFontSizeToFitWidth = false
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -37,7 +38,7 @@ class DigimonTableViewCell: UITableViewCell {
         stackView.axis = .horizontal
         stackView.alignment = .fill
         stackView.distribution = .fill
-        stackView.spacing = 20
+        stackView.spacing = 40
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -59,8 +60,8 @@ class DigimonTableViewCell: UITableViewCell {
 
     private func updateImage(of digimon: Digimon) {
         NetworkManager.shared.getImage(from: digimon.img) { data, error in
-            if let error {
-                print("Error \(error)") // TODO: Handle no image case
+            if error != nil {
+                self.digimonImage.image = UIImage(named: "broken_image")
             }
 
             if let data {
