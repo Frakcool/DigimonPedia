@@ -13,16 +13,36 @@ protocol DigimonTableViewCellProtocol {
 
 class DigimonTableViewCellDataManager {
     // Why using a singleton causes the images to be out of sync?
-    // Uncomment this line and the init one and use .shared in the cell's manager definition
-//    static let shared = DigimonTableViewCellDataManager()
+    // Happens the same when trying to use cached images
 
     var image: UIImage?
     var delegate: DigimonTableViewCellProtocol?
 
-//    private init() {}
+    private let cacheManager = CacheManager()
+    private var networkManager: NetworkManager!
+    private let serialQueue = DispatchQueue(label: "dataManagerSerialQueue")
+
+    init() {
+        networkManager = NetworkManager()
+    }
 
     func getImage(from imageURLString: String) {
-        NetworkManager.shared.getImage(from: imageURLString) { data, error in
+        print("About to get \(imageURLString)")
+        guard let cachedImage = cacheManager.getImage(imageURLString as NSString) else {
+            print("Loading from API")
+            serialQueue.sync {
+                loadFromAPI(from: imageURLString)
+            }
+            return
+        }
+        print("Successfully retrieved from cache \(imageURLString)")
+        serialQueue.sync {
+            self.image = cachedImage
+        }
+    }
+
+    private func loadFromAPI(from imageURLString: String) {
+        networkManager.getImage(from: imageURLString) { data, error in
             guard error == nil, let data else {
                 self.image = UIImage(named: "broken_image")
                 self.delegate?.updateImage()
@@ -30,6 +50,7 @@ class DigimonTableViewCellDataManager {
             }
 
             self.image = UIImage(data: data)
+            self.cacheManager.insertImage(imageURLString as NSString, image: self.image)
             self.delegate?.updateImage()
         }
     }

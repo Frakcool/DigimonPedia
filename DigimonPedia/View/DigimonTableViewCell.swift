@@ -8,7 +8,7 @@
 import UIKit
 
 class DigimonTableViewCell: UITableViewCell {
-    private let dataManager = DigimonTableViewCellDataManager()
+    private var dataManager: DigimonTableViewCellDataManager!
 
     private struct Constants {
         static let sidesMargin: CGFloat = 15
@@ -69,7 +69,9 @@ class DigimonTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
+        dataManager = DigimonTableViewCellDataManager()
         dataManager.delegate = self
+
         setupViews()
     }
 
@@ -84,15 +86,7 @@ class DigimonTableViewCell: UITableViewCell {
     }
 
     private func updateImage(of digimon: Digimon) {
-//        NetworkManager.shared.getImage(from: digimon.img) { data, error in
-//            if error != nil {
-//                self.digimonImage.image = UIImage(named: "broken_image")
-//            }
-//
-//            if let data {
-//                self.digimonImage.image = UIImage(data: data)
-//            }
-//        }
+        print("About to get image of \(digimon.name)")
         dataManager.getImage(from: digimon.img)
     }
 

@@ -46,10 +46,6 @@ enum NetworkError: Error {
 }
 
 struct NetworkManager {
-    static let shared = NetworkManager()
-
-    private init() {}
-
     typealias DigimonCompletionClosure = (([Digimon]?, Error?) -> Void)
     typealias DigimonImageCompletionClosure = ((Data?, Error?) -> Void)
 

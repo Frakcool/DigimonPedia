@@ -13,12 +13,14 @@ protocol MainViewProtocol {
 }
 
 class MainViewDataManager {
-    static let shared = MainViewDataManager()
+    private let networkManager: NetworkManager!
 
     var digimons: [Digimon] = []
     var delegate: MainViewProtocol?
 
-    private init() {}
+    init() {
+        networkManager = NetworkManager()
+    }
 
     private lazy var updateDigimons: (([Digimon]?, Error?) -> Void) = { digimons, error in
         guard error == nil, let digimons else {
@@ -31,21 +33,21 @@ class MainViewDataManager {
     }
 
     func getAllDigimon() {
-        NetworkManager.shared.fetchAllDigimon { digimons, error in
+        networkManager.fetchAllDigimon { digimons, error in
             print("All digimon")
             self.updateDigimons(digimons, error)
         }
     }
 
     func getDigimonsFilteredBy(name: String) {
-        NetworkManager.shared.searchDigimonBy(name: name) { digimons, error in
+        networkManager.searchDigimonBy(name: name) { digimons, error in
             print("Filter by name")
             self.updateDigimons(digimons, error)
         }
     }
 
     func getDigimonsFilteredBy(level: String) {
-        NetworkManager.shared.searchDigimonBy(level: level) { digimons, error in
+        networkManager.searchDigimonBy(level: level) { digimons, error in
             print("Filter by level")
             self.updateDigimons(digimons, error)
         }
