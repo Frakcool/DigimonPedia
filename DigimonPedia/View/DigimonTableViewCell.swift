@@ -8,7 +8,7 @@
 import UIKit
 
 class DigimonTableViewCell: UITableViewCell {
-    private var digimon: Digimon!
+    private var digimon: Digimon?
 
     private struct Constants {
         static let sidesMargin: CGFloat = 15
@@ -80,14 +80,27 @@ class DigimonTableViewCell: UITableViewCell {
         self.digimon = viewModel.digimon
         viewModel.delegate = self
         
-        nameLabel.text = digimon.name
-        levelLabel.text = digimon.level
+        nameLabel.text = digimon?.name
+        levelLabel.text = digimon?.level
         updateImage(viewModel: viewModel)
     }
 
     private func updateImage(viewModel: DigimonViewModel) {
-        print("About to get image of \(digimon.name)")
-        viewModel.updateImage()
+        print("About to get image of \(String(describing: digimon?.name))")
+        viewModel.fetchImage { [weak self] data in
+            guard let self else {
+                return
+            }
+
+            guard self.digimon?.img == viewModel.digimon.img else {
+                // We need to return here because the cell is supposed to be showing another digimon
+                return
+            }
+
+            DispatchQueue.main.async {
+                self.digimonImage.image = UIImage(data: data)
+            }
+        }
     }
 
     private func setupTextStackView() {
@@ -121,9 +134,13 @@ class DigimonTableViewCell: UITableViewCell {
 }
 
 extension DigimonTableViewCell: DigimonTableViewCellDelegate {
-    func updateCellImage(_ image: UIImage?) {
+    func updateCellImage(_ image: Data?) {
         DispatchQueue.main.async {
-            self.digimonImage.image = image
+            guard let image else {
+                self.digimonImage.image = UIImage(named: "broken_image")
+                return
+            }
+            self.digimonImage.image = UIImage(data: image)
         }
     }
 }

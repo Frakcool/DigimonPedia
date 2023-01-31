@@ -14,7 +14,7 @@ enum DigimonFilterOption: String, CaseIterable {
 
 class MainViewController: UIViewController {
     private var viewModel = MainViewViewModel()
-    private var currentFilter: DigimonFilterOption!
+    private var currentFilter: DigimonFilterOption?
     private var digimonNotFoundView = DigimonNotFoundView()
 
     private struct Constants {
@@ -99,7 +99,7 @@ class MainViewController: UIViewController {
 
     @objc private func indexChanged(_ sender: UISegmentedControl) {
         currentFilter = DigimonFilterOption.allCases[segmentedControl.selectedSegmentIndex]
-        searchBar.placeholder = "Filter by \(currentFilter.rawValue)"
+        searchBar.placeholder = "Filter by \(currentFilter?.rawValue ?? "Name")"
     }
 
     @objc private func dismissKeyboard() {
@@ -165,8 +165,8 @@ extension MainViewController: UISearchBarDelegate {
         }
     }
 
-    private func filterWith(by filter: DigimonFilterOption, with text: String?) {
-        guard let text, !text.isEmpty else {
+    private func filterWith(by filter: DigimonFilterOption?, with text: String?) {
+        guard let text, !text.isEmpty, filter != nil else {
             return
         }
         switch filter {
@@ -174,6 +174,8 @@ extension MainViewController: UISearchBarDelegate {
                 filterBy(name: text)
             case .level:
                 filterBy(level: text)
+            case .none:
+                return
         }
     }
 

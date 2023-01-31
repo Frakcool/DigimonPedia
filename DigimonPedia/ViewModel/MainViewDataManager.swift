@@ -13,7 +13,7 @@ protocol MainViewDelegate {
 }
 
 class MainViewViewModel {
-    private let networkManager: NetworkManager!
+    private let networkManager: NetworkManager?
 
     var digimons: [Digimon] = []
     var delegate: MainViewDelegate?
@@ -33,21 +33,21 @@ class MainViewViewModel {
     }
 
     func getAllDigimon() {
-        networkManager.fetchAllDigimon { digimons, error in
+        networkManager?.fetchAllDigimon { digimons, error in
             print("All digimon")
             self.updateDigimons(digimons, error)
         }
     }
 
     func getDigimonsFilteredBy(name: String) {
-        networkManager.searchDigimonBy(name: name) { digimons, error in
+        networkManager?.searchDigimonBy(name: name) { digimons, error in
             print("Filter by name")
             self.updateDigimons(digimons, error)
         }
     }
 
     func getDigimonsFilteredBy(level: String) {
-        networkManager.searchDigimonBy(level: level) { digimons, error in
+        networkManager?.searchDigimonBy(level: level) { digimons, error in
             print("Filter by level")
             self.updateDigimons(digimons, error)
         }

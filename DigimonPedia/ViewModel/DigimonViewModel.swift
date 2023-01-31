@@ -5,16 +5,15 @@
 //  Created by Jesus Sanchez on 30/01/23.
 //
 
-import UIKit
+import Foundation
 
 protocol DigimonTableViewCellDelegate {
-    func updateCellImage(_ image: UIImage?)
+    func updateCellImage(_ imageData: Data?)
 }
 
 class DigimonViewModel {
     var digimon: Digimon
-    var image: UIImage!
-    var delegate: DigimonTableViewCellDelegate!
+    var delegate: DigimonTableViewCellDelegate?
     
     private let cacheManager = CacheManager.shared
     private var networkManager = NetworkManager()
@@ -23,11 +22,11 @@ class DigimonViewModel {
         self.digimon = digimon
     }
 
-    func updateImage() {
+    func fetchImage(_ completion: (Data) -> Void) {
         let imageURLString = digimon.img
 
         print("About to get \(imageURLString)")
-        cacheManager.getImage(imageURLString as NSString, completion: { cachedImage in
+        cacheManager.getImage(imageURLString as NSString) { cachedImage in
             guard let cachedImage else {
                 print("Loading from API")
                 self.loadFromAPI(from: imageURLString)
@@ -35,22 +34,19 @@ class DigimonViewModel {
             }
 
             print("Successfully retrieved from cache \(imageURLString)")
-            self.image = cachedImage
-            self.delegate.updateCellImage(self.image)
-        })
+            self.delegate?.updateCellImage(cachedImage as Data)
+        }
     }
 
     private func loadFromAPI(from imageURLString: String) {
         networkManager.getImage(from: imageURLString) { data, error in
             guard error == nil, let data else {
-                self.image = UIImage(named: "broken_image")
-                self.delegate.updateCellImage(self.image)
+                self.delegate?.updateCellImage(nil)
                 return
             }
 
-            self.image = UIImage(data: data)
-            self.cacheManager.insertImage(imageURLString as NSString, image: self.image)
-            self.delegate.updateCellImage(self.image)
+            self.cacheManager.insertImage(imageURLString as NSString, imageData: data as NSData)
+            self.delegate?.updateCellImage(data as Data)
         }
     }
 }
