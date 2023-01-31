@@ -8,7 +8,7 @@
 import UIKit
 
 class DigimonTableViewCell: UITableViewCell {
-    private var dataManager: DigimonTableViewCellDataManager!
+    private var digimon: Digimon!
 
     private struct Constants {
         static let sidesMargin: CGFloat = 15
@@ -69,9 +69,6 @@ class DigimonTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
-        dataManager = DigimonTableViewCellDataManager()
-        dataManager.delegate = self
-
         setupViews()
     }
 
@@ -79,15 +76,18 @@ class DigimonTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func configureCell(with digimon: Digimon) {
+    func configureCell(with viewModel: DigimonViewModel) {
+        self.digimon = viewModel.digimon
+        viewModel.delegate = self
+        
         nameLabel.text = digimon.name
         levelLabel.text = digimon.level
-        updateImage(of: digimon)
+        updateImage(viewModel: viewModel)
     }
 
-    private func updateImage(of digimon: Digimon) {
+    private func updateImage(viewModel: DigimonViewModel) {
         print("About to get image of \(digimon.name)")
-        dataManager.getImage(from: digimon.img)
+        viewModel.updateImage()
     }
 
     private func setupTextStackView() {
@@ -120,8 +120,10 @@ class DigimonTableViewCell: UITableViewCell {
     }
 }
 
-extension DigimonTableViewCell: DigimonTableViewCellProtocol {
-    func updateImage() {
-        digimonImage.image = dataManager.image
+extension DigimonTableViewCell: DigimonTableViewCellDelegate {
+    func updateCellImage(_ image: UIImage?) {
+        DispatchQueue.main.async {
+            self.digimonImage.image = image
+        }
     }
 }

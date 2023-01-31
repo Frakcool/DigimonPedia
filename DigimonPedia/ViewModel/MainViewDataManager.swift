@@ -1,5 +1,5 @@
 //
-//  MainViewDataManager.swift
+//  MainViewViewModel.swift
 //  DigimonPedia
 //
 //  Created by Jesus Sanchez on 27/01/23.
@@ -7,16 +7,16 @@
 
 import Foundation
 
-protocol MainViewProtocol {
+protocol MainViewDelegate {
     func showDigimons()
     func showErrorScreen()
 }
 
-class MainViewDataManager {
+class MainViewViewModel {
     private let networkManager: NetworkManager!
 
     var digimons: [Digimon] = []
-    var delegate: MainViewProtocol?
+    var delegate: MainViewDelegate?
 
     init() {
         networkManager = NetworkManager()

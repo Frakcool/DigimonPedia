@@ -8,6 +8,10 @@
 import UIKit
 
 class CacheManager {
+    static let shared = CacheManager()
+
+    private init() {}
+
     private let cache = NSCache<NSString, UIImage>()
     private let serialQueue = DispatchQueue(label: "digimonCacheSerialQueue")
 
@@ -15,16 +19,17 @@ class CacheManager {
         print("About to save to cache")
         if let image {
             print("Saving to cache")
-            serialQueue.sync {
-                cache.setObject(image, forKey: imageURLString)
+            serialQueue.async {
+                self.cache.setObject(image, forKey: imageURLString)
+                print("Saved to cache")
             }
         }
     }
 
-    func getImage(_ imageURLString: NSString) -> UIImage? {
+    func getImage(_ imageURLString: NSString, completion: @escaping (UIImage?) -> Void) {
         print("Retrieving from cache")
-        return serialQueue.sync {
-            cache.object(forKey: imageURLString)
+        return serialQueue.async {
+            completion(self.cache.object(forKey: imageURLString))
         }
     }
 }

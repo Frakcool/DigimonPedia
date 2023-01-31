@@ -17,7 +17,7 @@
 		CDF99D682984B51400F96828 /* MainViewDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF99D672984B51400F96828 /* MainViewDataManager.swift */; };
 		CDF99D6A2984E94A00F96828 /* DigimonNotFoundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF99D692984E94A00F96828 /* DigimonNotFoundView.swift */; };
 		CDF99D6D2985C8AB00F96828 /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF99D6C2985C8AB00F96828 /* CacheManager.swift */; };
-		CDF99D6F2985D92200F96828 /* DigimonTableViewCellDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF99D6E2985D92200F96828 /* DigimonTableViewCellDataManager.swift */; };
+		CDF99D7129883F8800F96828 /* DigimonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF99D7029883F8800F96828 /* DigimonViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,7 +33,7 @@
 		CDF99D672984B51400F96828 /* MainViewDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewDataManager.swift; sourceTree = "<group>"; };
 		CDF99D692984E94A00F96828 /* DigimonNotFoundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DigimonNotFoundView.swift; sourceTree = "<group>"; };
 		CDF99D6C2985C8AB00F96828 /* CacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheManager.swift; sourceTree = "<group>"; };
-		CDF99D6E2985D92200F96828 /* DigimonTableViewCellDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DigimonTableViewCellDataManager.swift; sourceTree = "<group>"; };
+		CDF99D7029883F8800F96828 /* DigimonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DigimonViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +71,7 @@
 				CDF99D652984B4AB00F96828 /* Services */,
 				CD24B5CD297F80D70030259A /* SupportingFiles */,
 				CD24B5CE297F822B0030259A /* View */,
+				CDF99D7229883F8E00F96828 /* ViewModel */,
 			);
 			path = DigimonPedia;
 			sourceTree = "<group>";
@@ -123,19 +124,9 @@
 			isa = PBXGroup;
 			children = (
 				CDF99D6B2985C89C00F96828 /* Cache */,
-				CDF99D662984B4CB00F96828 /* Data */,
 				CD24B5C9297F7DD00030259A /* Network */,
 			);
 			path = Services;
-			sourceTree = "<group>";
-		};
-		CDF99D662984B4CB00F96828 /* Data */ = {
-			isa = PBXGroup;
-			children = (
-				CDF99D672984B51400F96828 /* MainViewDataManager.swift */,
-				CDF99D6E2985D92200F96828 /* DigimonTableViewCellDataManager.swift */,
-			);
-			path = Data;
 			sourceTree = "<group>";
 		};
 		CDF99D6B2985C89C00F96828 /* Cache */ = {
@@ -144,6 +135,15 @@
 				CDF99D6C2985C8AB00F96828 /* CacheManager.swift */,
 			);
 			path = Cache;
+			sourceTree = "<group>";
+		};
+		CDF99D7229883F8E00F96828 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				CDF99D672984B51400F96828 /* MainViewDataManager.swift */,
+				CDF99D7029883F8800F96828 /* DigimonViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -220,11 +220,11 @@
 				CDF99D682984B51400F96828 /* MainViewDataManager.swift in Sources */,
 				CD24B5CC297F7EA80030259A /* MainViewController.swift in Sources */,
 				CDF99D6A2984E94A00F96828 /* DigimonNotFoundView.swift in Sources */,
+				CDF99D7129883F8800F96828 /* DigimonViewModel.swift in Sources */,
 				CDF99D6D2985C8AB00F96828 /* CacheManager.swift in Sources */,
 				CDF99D642984885600F96828 /* NetworkManager.swift in Sources */,
 				CD24B5D1297F89200030259A /* Digimon.swift in Sources */,
 				CDF99D6229845AE800F96828 /* DigimonTableViewCell.swift in Sources */,
-				CDF99D6F2985D92200F96828 /* DigimonTableViewCellDataManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

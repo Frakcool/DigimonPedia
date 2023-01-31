@@ -13,7 +13,7 @@ enum DigimonFilterOption: String, CaseIterable {
 }
 
 class MainViewController: UIViewController {
-    private var dataManager = MainViewDataManager()
+    private var viewModel = MainViewViewModel()
     private var currentFilter: DigimonFilterOption!
     private var digimonNotFoundView = DigimonNotFoundView()
 
@@ -57,7 +57,7 @@ class MainViewController: UIViewController {
 
         view.backgroundColor = .systemBackground
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard)))
-        dataManager.delegate = self
+        viewModel.delegate = self
         setupStackView()
     }
 
@@ -79,7 +79,7 @@ class MainViewController: UIViewController {
     private func setupSegmentedControl() {
         stackView.addArrangedSubview(segmentedControl)
         segmentedControl.addTarget(self, action: #selector(MainViewController.indexChanged(_:)), for: .valueChanged)
-        segmentedControl.sendActions(for: .valueChanged) // Trigger indexChanged so that placeholder for searchBar is updated
+        segmentedControl.sendActions(for: .valueChanged) // Triggers indexChanged so that placeholder for searchBar is updated
     }
 
     private func setupDigimonNotFoundView() {
@@ -107,7 +107,7 @@ class MainViewController: UIViewController {
     }
 
     private func getAllDigimon() {
-        dataManager.getAllDigimon()
+        viewModel.getAllDigimon()
     }
 
     private func setupConstraints() {
@@ -122,7 +122,7 @@ class MainViewController: UIViewController {
 
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        dataManager.digimons.count
+        viewModel.digimons.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -130,7 +130,9 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()
         }
 
-        cell.configureCell(with: dataManager.digimons[indexPath.row])
+        let digimonViewModel = DigimonViewModel(digimon: viewModel.digimons[indexPath.row])
+        cell.configureCell(with: digimonViewModel)
+        
         return cell
     }
 
@@ -139,7 +141,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-extension MainViewController: MainViewProtocol {
+extension MainViewController: MainViewDelegate {
     func showDigimons() {
         digimonTableView.reloadData()
         digimonTableView.isHidden = false
@@ -176,10 +178,10 @@ extension MainViewController: UISearchBarDelegate {
     }
 
     private func filterBy(name: String) {
-        dataManager.getDigimonsFilteredBy(name: name)
+        viewModel.getDigimonsFilteredBy(name: name)
     }
 
     private func filterBy(level: String) {
-        dataManager.getDigimonsFilteredBy(level: level)
+        viewModel.getDigimonsFilteredBy(level: level)
     }
 }
