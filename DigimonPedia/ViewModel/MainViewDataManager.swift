@@ -52,4 +52,9 @@ class MainViewViewModel {
             self.updateDigimons(digimons, error)
         }
     }
+
+    func purgeCoreData() {
+        print("About to purge Core Data")
+        CoreDataManager.shared.purgeCoreData()
+    }
 }

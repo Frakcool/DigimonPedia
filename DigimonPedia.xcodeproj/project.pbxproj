@@ -11,6 +11,10 @@
 		CD24B5BF297F7D230030259A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD24B5BE297F7D230030259A /* Assets.xcassets */; };
 		CD24B5CC297F7EA80030259A /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD24B5CB297F7EA80030259A /* MainViewController.swift */; };
 		CD24B5D1297F89200030259A /* Digimon.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD24B5D0297F89200030259A /* Digimon.swift */; };
+		CD2ED02529B9767C007FFA76 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2ED02429B9767C007FFA76 /* CoreDataManager.swift */; };
+		CD92BBC329B989410057215E /* DigimonImage+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD92BBC129B989410057215E /* DigimonImage+CoreDataClass.swift */; };
+		CD92BBC429B989410057215E /* DigimonImage+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD92BBC229B989410057215E /* DigimonImage+CoreDataProperties.swift */; };
+		CD92BBC629B98FB60057215E /* DigimonCoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CD92BBBA29B984AF0057215E /* DigimonCoreDataModel.xcdatamodeld */; };
 		CDF99D602984554000F96828 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDF99D5F2984554000F96828 /* LaunchScreen.storyboard */; };
 		CDF99D6229845AE800F96828 /* DigimonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF99D6129845AE800F96828 /* DigimonTableViewCell.swift */; };
 		CDF99D642984885600F96828 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF99D632984885600F96828 /* NetworkManager.swift */; };
@@ -27,6 +31,10 @@
 		CD24B5C3297F7D230030259A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CD24B5CB297F7EA80030259A /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		CD24B5D0297F89200030259A /* Digimon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Digimon.swift; sourceTree = "<group>"; };
+		CD2ED02429B9767C007FFA76 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		CD92BBBB29B984AF0057215E /* DigimonCoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DigimonCoreDataModel.xcdatamodel; sourceTree = "<group>"; };
+		CD92BBC129B989410057215E /* DigimonImage+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DigimonImage+CoreDataClass.swift"; sourceTree = "<group>"; };
+		CD92BBC229B989410057215E /* DigimonImage+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DigimonImage+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		CDF99D5F2984554000F96828 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CDF99D6129845AE800F96828 /* DigimonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DigimonTableViewCell.swift; sourceTree = "<group>"; };
 		CDF99D632984885600F96828 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
@@ -87,7 +95,10 @@
 		CD24B5CA297F7E210030259A /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				CD92BBC129B989410057215E /* DigimonImage+CoreDataClass.swift */,
+				CD92BBC229B989410057215E /* DigimonImage+CoreDataProperties.swift */,
 				CD24B5D0297F89200030259A /* Digimon.swift */,
+				CD92BBBA29B984AF0057215E /* DigimonCoreDataModel.xcdatamodeld */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -120,9 +131,18 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		CD2ED02329B97649007FFA76 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				CD2ED02429B9767C007FFA76 /* CoreDataManager.swift */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
 		CDF99D652984B4AB00F96828 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				CD2ED02329B97649007FFA76 /* CoreData */,
 				CDF99D6B2985C89C00F96828 /* Cache */,
 				CD24B5C9297F7DD00030259A /* Network */,
 			);
@@ -216,8 +236,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD92BBC629B98FB60057215E /* DigimonCoreDataModel.xcdatamodeld in Sources */,
 				CD24B5B6297F7D210030259A /* AppDelegate.swift in Sources */,
+				CD92BBC429B989410057215E /* DigimonImage+CoreDataProperties.swift in Sources */,
 				CDF99D682984B51400F96828 /* MainViewDataManager.swift in Sources */,
+				CD92BBC329B989410057215E /* DigimonImage+CoreDataClass.swift in Sources */,
 				CD24B5CC297F7EA80030259A /* MainViewController.swift in Sources */,
 				CDF99D6A2984E94A00F96828 /* DigimonNotFoundView.swift in Sources */,
 				CDF99D7129883F8800F96828 /* DigimonViewModel.swift in Sources */,
@@ -225,6 +248,7 @@
 				CDF99D642984885600F96828 /* NetworkManager.swift in Sources */,
 				CD24B5D1297F89200030259A /* Digimon.swift in Sources */,
 				CDF99D6229845AE800F96828 /* DigimonTableViewCell.swift in Sources */,
+				CD2ED02529B9767C007FFA76 /* CoreDataManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -418,6 +442,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		CD92BBBA29B984AF0057215E /* DigimonCoreDataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				CD92BBBB29B984AF0057215E /* DigimonCoreDataModel.xcdatamodel */,
+			);
+			currentVersion = CD92BBBB29B984AF0057215E /* DigimonCoreDataModel.xcdatamodel */;
+			path = DigimonCoreDataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = CD24B5AA297F7D210030259A /* Project object */;
 }

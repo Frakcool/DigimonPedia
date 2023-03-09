@@ -52,6 +52,15 @@ class MainViewController: UIViewController {
         return searchBar
     }()
 
+    private let purgeCoreDataButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Purge Core Data", for: .normal)
+        button.setTitleColor(.red, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+
+        return button
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -65,6 +74,7 @@ class MainViewController: UIViewController {
         view.addSubview(stackView)
 
         setupSearchBar()
+        setupPurgeCoreDataButton()
         setupSegmentedControl()
         setupTableView()
         setupDigimonNotFoundView()
@@ -97,6 +107,13 @@ class MainViewController: UIViewController {
         getAllDigimon()
     }
 
+    private func setupPurgeCoreDataButton() {
+        stackView.addArrangedSubview(purgeCoreDataButton)
+        let tap = UITapGestureRecognizer(target: self, action: #selector(purgeButtonPressed))
+        tap.numberOfTapsRequired = 2
+        purgeCoreDataButton.addGestureRecognizer(tap)
+    }
+
     @objc private func indexChanged(_ sender: UISegmentedControl) {
         currentFilter = DigimonFilterOption.allCases[segmentedControl.selectedSegmentIndex]
         searchBar.placeholder = "Filter by \(currentFilter?.rawValue ?? "Name")"
@@ -104,6 +121,10 @@ class MainViewController: UIViewController {
 
     @objc private func dismissKeyboard() {
         view.endEditing(true)
+    }
+
+    @objc private func purgeButtonPressed() {
+        viewModel.purgeCoreData()
     }
 
     private func getAllDigimon() {
