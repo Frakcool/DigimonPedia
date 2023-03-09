@@ -74,9 +74,9 @@ class MainViewController: UIViewController {
         view.addSubview(stackView)
 
         setupSearchBar()
-        setupPurgeCoreDataButton()
         setupSegmentedControl()
         setupTableView()
+        setupPurgeCoreDataButton()
         setupDigimonNotFoundView()
         setupConstraints()
     }
@@ -134,7 +134,7 @@ class MainViewController: UIViewController {
     private func setupConstraints() {
         NSLayoutConstraint.activate([
             stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            stackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.sidesMargin),
             stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.sidesMargin),
         ])
