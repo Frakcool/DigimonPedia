@@ -32,24 +32,33 @@ class MainViewViewModel {
         self.delegate?.showDigimons()
     }
 
-    func getAllDigimon() {
-        networkManager?.fetchAllDigimon { digimons, error in
+    func getAllDigimon() async {
+        do {
+            let digimons = try await networkManager?.fetchAllDigimon()
             print("All digimon")
-            self.updateDigimons(digimons, error)
+            self.updateDigimons(digimons, nil)
+        } catch {
+            self.updateDigimons(nil, error)
         }
     }
 
-    func getDigimonsFilteredBy(name: String) {
-        networkManager?.searchDigimonBy(name: name) { digimons, error in
+    func getDigimonsFilteredBy(name: String) async {
+        do {
+            let digimons = try await networkManager?.searchDigimonBy(name: name)
             print("Filter by name")
-            self.updateDigimons(digimons, error)
+            self.updateDigimons(digimons, nil)
+        } catch {
+            self.updateDigimons(nil, error)
         }
     }
 
-    func getDigimonsFilteredBy(level: String) {
-        networkManager?.searchDigimonBy(level: level) { digimons, error in
+    func getDigimonsFilteredBy(level: String) async {
+        do {
+            let digimons = try await networkManager?.searchDigimonBy(level: level)
             print("Filter by level")
-            self.updateDigimons(digimons, error)
+            self.updateDigimons(digimons, nil)
+        } catch {
+            self.updateDigimons(nil, error)
         }
     }
 

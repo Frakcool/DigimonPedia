@@ -46,39 +46,37 @@ enum NetworkError: Error {
 }
 
 struct NetworkManager {
-    typealias DigimonCompletionClosure = (([Digimon]?, Error?) -> Void)
-    typealias DigimonImageCompletionClosure = ((Data?, Error?) -> Void)
-
-    public func fetchAllDigimon(completion: DigimonCompletionClosure?) {
+    public func fetchAllDigimon() async throws -> [Digimon] {
         guard let request = createRequest(for: .digimon) else {
-            completion?(nil, NetworkError.invalidUrl)
-            return
+            throw NetworkError.invalidUrl
         }
-        executeRequest(request: request, completion: completion)
+
+        let (data, _) = try await URLSession.shared.data(for: request)
+        return try JSONDecoder().decode([Digimon].self, from: data)
     }
 
-    public func searchDigimonBy(name digimonName: String, completion: DigimonCompletionClosure?) {
+    public func searchDigimonBy(name digimonName: String) async throws -> [Digimon] {
         guard let request = createRequest(for: .nameSearch(name: digimonName)) else {
-            completion?(nil, NetworkError.invalidUrl)
-            return
+            throw NetworkError.invalidUrl
         }
-        executeRequest(request: request, completion: completion)
+        let (data, _) = try await URLSession.shared.data(for: request)
+        return try JSONDecoder().decode([Digimon].self, from: data)
     }
 
-    public func searchDigimonBy(level digimonLevel: String, completion: DigimonCompletionClosure?) {
+    public func searchDigimonBy(level digimonLevel: String) async throws -> [Digimon] {
         guard let request = createRequest(for: .levelSearch(level: digimonLevel)) else {
-            completion?(nil, NetworkError.invalidUrl)
-            return
+            throw NetworkError.invalidUrl
         }
-        executeRequest(request: request, completion: completion)
+        let (data, _) = try await URLSession.shared.data(for: request)
+        return try JSONDecoder().decode([Digimon].self, from: data)
     }
 
-    public func getImage(from url: String, completion: DigimonImageCompletionClosure?) {
+    public func getImage(from url: String) async throws -> Data {
         guard let request = createRequest(for: .digimonImage(imageUrl: url)) else {
-            completion?(nil, NetworkError.invalidUrl)
-            return
+            throw NetworkError.invalidUrl
         }
-        executeRequest(request: request, completion: completion)
+        let (data, _) = try await URLSession.shared.data(for: request)
+        return data
     }
 
     private func createRequest(for digimonEndpoint: DigimonEndpoint) -> URLRequest? {
@@ -89,31 +87,20 @@ struct NetworkManager {
         return request
     }
 
-    private func executeRequest<T: Codable>(request: URLRequest, completion: ((T?, Error?) -> Void)?) {
+    private func executeRequest<T: Codable>(request: URLRequest) async throws -> T? {
         let session = URLSession(configuration: .default)
-        let dataTask = session.dataTask(with: request) { (data, response, error) in
-            guard let data else {
-                DispatchQueue.main.async {
-                    completion?(nil, error)
-                }
-                return
-            }
+        let (data, response) = try await session.data(for: request)
 
-            if self.isImage(mimeType: response?.mimeType) {
-                DispatchQueue.main.async {
-                    completion?(data as? T, nil)
-                }
-            } else if let decodedResponse = try? JSONDecoder().decode(T.self, from: data) {
-                DispatchQueue.main.async {
-                    completion?(decodedResponse, nil)
-                }
-            } else {
-                DispatchQueue.main.async {
-                    completion?(nil, NetworkError.invalidData)
-                }
+        if self.isImage(mimeType: response.mimeType) {
+            return data as? T
+        } else {
+            do {
+                let decodedResponse = try JSONDecoder().decode(T.self, from: data)
+                return decodedResponse
+            } catch {
+                throw NetworkError.invalidData
             }
         }
-        dataTask.resume()
     }
 
     private func isImage(mimeType: String?) -> Bool {

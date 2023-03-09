@@ -104,7 +104,9 @@ class MainViewController: UIViewController {
         digimonTableView.delegate = self
         digimonTableView.dataSource = self
 
-        getAllDigimon()
+        Task {
+            await getAllDigimon()
+        }
     }
 
     private func setupPurgeCoreDataButton() {
@@ -127,8 +129,8 @@ class MainViewController: UIViewController {
         viewModel.purgeCoreData()
     }
 
-    private func getAllDigimon() {
-        viewModel.getAllDigimon()
+    private func getAllDigimon() async {
+        await viewModel.getAllDigimon()
     }
 
     private func setupConstraints() {
@@ -164,47 +166,55 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension MainViewController: MainViewDelegate {
     func showDigimons() {
-        digimonTableView.reloadData()
-        digimonTableView.isHidden = false
-        digimonNotFoundView.isHidden = true
+        DispatchQueue.main.async {
+            self.digimonTableView.reloadData()
+            self.digimonTableView.isHidden = false
+            self.digimonNotFoundView.isHidden = true
+        }
     }
 
     func showErrorScreen() {
-        digimonTableView.isHidden = true
-        digimonNotFoundView.isHidden = false
+        DispatchQueue.main.async {
+            self.digimonTableView.isHidden = true
+            self.digimonNotFoundView.isHidden = false
+        }
     }
 }
 
 extension MainViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        filterWith(by: currentFilter, with: searchBar.text)
+        Task {
+            await filterWith(by: currentFilter, with: searchBar.text)
+        }
     }
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.isEmpty {
-            getAllDigimon()
+            Task {
+                await getAllDigimon()
+            }
         }
     }
 
-    private func filterWith(by filter: DigimonFilterOption?, with text: String?) {
+    private func filterWith(by filter: DigimonFilterOption?, with text: String?) async {
         guard let text, !text.isEmpty, filter != nil else {
             return
         }
         switch filter {
             case .name:
-                filterBy(name: text)
+                await filterBy(name: text)
             case .level:
-                filterBy(level: text)
+                await filterBy(level: text)
             case .none:
                 return
         }
     }
 
-    private func filterBy(name: String) {
-        viewModel.getDigimonsFilteredBy(name: name)
+    private func filterBy(name: String) async {
+        await viewModel.getDigimonsFilteredBy(name: name)
     }
 
-    private func filterBy(level: String) {
-        viewModel.getDigimonsFilteredBy(level: level)
+    private func filterBy(level: String) async {
+        await viewModel.getDigimonsFilteredBy(level: level)
     }
 }

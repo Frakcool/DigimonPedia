@@ -82,24 +82,23 @@ class DigimonTableViewCell: UITableViewCell {
         
         nameLabel.text = digimon?.name
         levelLabel.text = digimon?.level
-        updateImage(viewModel: viewModel)
+        Task {
+            await updateImage(viewModel: viewModel)
+        }
     }
 
-    private func updateImage(viewModel: DigimonViewModel) {
+    private func updateImage(viewModel: DigimonViewModel) async {
         print("About to get image of \(String(describing: digimon?.name))")
-        viewModel.fetchImage { [weak self] data in
-            guard let self else {
-                return
-            }
+        guard let data = await viewModel.fetchImage() else {
+            return
+        }
 
-            guard self.digimon?.img == viewModel.digimon.img else {
-                // We need to return here because the cell is supposed to be showing another digimon
-                return
-            }
+        guard self.digimon?.img == viewModel.digimon.img else {
+            return
+        }
 
-            DispatchQueue.main.async {
-                self.digimonImage.image = UIImage(data: data)
-            }
+        DispatchQueue.main.async {
+            self.digimonImage.image = UIImage(data: data)
         }
     }
 
@@ -120,14 +119,13 @@ class DigimonTableViewCell: UITableViewCell {
     private func setupConstraints() {
         let digimonImageHeightConstraint = digimonImage.heightAnchor.constraint(equalToConstant: Constants.imageSize)
         digimonImageHeightConstraint.priority = .defaultHigh
-
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: topAnchor),
-            stackView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.sidesMargin),
-            stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.sidesMargin),
+            self.stackView.topAnchor.constraint(equalTo: self.topAnchor),
+            self.stackView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            self.stackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: Constants.sidesMargin),
+            self.stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -Constants.sidesMargin),
 
-            digimonImage.widthAnchor.constraint(equalToConstant: Constants.imageSize),
+            self.digimonImage.widthAnchor.constraint(equalToConstant: Constants.imageSize),
             digimonImageHeightConstraint,
         ])
     }

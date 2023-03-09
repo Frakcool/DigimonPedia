@@ -16,38 +16,50 @@ class CacheManager {
     private let serialQueue = DispatchQueue(label: "digimonCacheSerialQueue")
 
     func insertImage(_ imageURLString: NSString, imageData: NSData?) {
-        print("About to save to cache")
+        print("About to save to cache \(imageURLString)")
         if let imageData {
-            print("Saving to cache")
+            print("Saving to cache \(imageURLString)")
             serialQueue.async {
                 self.cache.setObject(imageData, forKey: imageURLString)
                 self.saveToCoreData(imageData, name: imageURLString as String)
-                print("Saved to cache")
+                print("Saved to cache \(imageURLString)")
             }
         }
     }
 
-    func getImage(_ imageURLString: NSString, _ completion: @escaping (NSData?) -> Void) {
-        print("Retrieving from cache")
-        return serialQueue.async {
-            if let imageInDisk = self.readFromCoreData(named: imageURLString as String) {
-                print("Image is stored in disk")
-                completion(imageInDisk)
-            } else {
-                print("Image is not stored in disk, using NSCache")
-                completion(self.cache.object(forKey: imageURLString))
-            }
+    func getImage(_ imageURLString: String) -> NSData? {
+        if let imageFromDisk = getImageFromDisk(imageURLString) {
+            print("Image exists on disk \(imageURLString)")
+            return imageFromDisk
+        } else if let imageFromCache = getImageFromCache(imageURLString) {
+            print("Image does not exist on disk, loading from NSCache \(imageURLString)")
+            self.saveToCoreData(imageFromCache, name: imageURLString as String)
+            return imageFromCache
         }
+        print("Image not in cache \(imageURLString)")
+        return nil
+    }
+
+    private func getImageFromDisk(_ imageURLString: String) -> NSData? {
+        print("Retrieving from disk \(imageURLString)")
+
+        return self.readFromCoreData(named: imageURLString)
+    }
+
+    private func getImageFromCache(_ imageURLString: String) -> NSData? {
+        print("Retrieving from cache \(imageURLString)")
+
+        return self.cache.object(forKey: imageURLString as NSString)
     }
 
     private func saveToCoreData(_ imageData: NSData, name: String) {
-        print("Saving to disk")
+        print("Saving to disk \(name)")
         let coreDataManager = CoreDataManager.shared
         coreDataManager.saveImageDataToCoreData(imageData, name: name)
     }
 
     private func readFromCoreData(named name: String) -> NSData? {
-        print("Reading from disk")
+        print("Reading from disk \(name)")
         let coreDataManager = CoreDataManager.shared
         return coreDataManager.getSavedImageData(named: name)
     }

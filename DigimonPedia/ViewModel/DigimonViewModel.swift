@@ -22,31 +22,32 @@ class DigimonViewModel {
         self.digimon = digimon
     }
 
-    func fetchImage(_ completion: (Data) -> Void) {
+    func fetchImage() async -> Data? {
         let imageURLString = digimon.img
 
         print("About to get \(imageURLString)")
-        cacheManager.getImage(imageURLString as NSString) { cachedImage in
-            guard let cachedImage else {
-                print("Loading from API")
-                self.loadFromAPI(from: imageURLString)
-                return
+        guard let cachedImage = cacheManager.getImage(imageURLString) else {
+            print("Loading from API")
+            guard let imageData = await self.loadFromAPI(from: imageURLString) else {
+                return nil
             }
-
-            print("Successfully retrieved from cache \(imageURLString)")
-            self.delegate?.updateCellImage(cachedImage as Data)
+            return imageData
         }
+
+        print("Successfully retrieved from cache \(imageURLString)")
+        self.delegate?.updateCellImage(cachedImage as Data)
+        return cachedImage as Data
     }
 
-    private func loadFromAPI(from imageURLString: String) {
-        networkManager.getImage(from: imageURLString) { data, error in
-            guard error == nil, let data else {
-                self.delegate?.updateCellImage(nil)
-                return
-            }
-
+    private func loadFromAPI(from imageURLString: String) async -> Data? {
+        do {
+            let data = try await networkManager.getImage(from: imageURLString)
             self.cacheManager.insertImage(imageURLString as NSString, imageData: data as NSData)
             self.delegate?.updateCellImage(data as Data)
+            return data
+        } catch {
+            self.delegate?.updateCellImage(nil)
+            return nil
         }
     }
 }
