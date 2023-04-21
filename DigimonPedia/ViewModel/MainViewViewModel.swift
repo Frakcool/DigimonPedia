@@ -7,16 +7,26 @@
 
 import Foundation
 
-protocol MainViewDelegate {
+protocol MainViewModelDelegate: AnyObject {
     func showDigimons()
     func showErrorScreen()
 }
 
-class MainViewViewModel {
+protocol MainViewViewModelProtocol: AnyObject {
+    var digimons: [Digimon] { get set }
+    var delegate: MainViewModelDelegate? { get set }
+
+    func getAllDigimon() async
+    func getDigimonsFilteredBy(name: String) async
+    func getDigimonsFilteredBy(level: String) async
+    func purgeCoreData()
+}
+
+class MainViewViewModel: MainViewViewModelProtocol {
     private let networkManager: NetworkManager?
 
     var digimons: [Digimon] = []
-    var delegate: MainViewDelegate?
+    weak var delegate: MainViewModelDelegate?
 
     init() {
         networkManager = NetworkManager()

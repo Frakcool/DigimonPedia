@@ -14,7 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         let _ = CoreDataManager.shared.persistentContainer
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = MainViewController()
+        window?.rootViewController = MainViewController(viewModel: MainViewViewModel())
         window?.makeKeyAndVisible()
 
         return true

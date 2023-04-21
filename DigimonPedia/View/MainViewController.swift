@@ -13,11 +13,13 @@ enum DigimonFilterOption: String, CaseIterable {
 }
 
 class MainViewController: UIViewController {
-    private var viewModel = MainViewViewModel()
+    private let viewModel: MainViewViewModelProtocol
+    private let digimonNotFoundView = DigimonNotFoundView()
+
     private var currentFilter: DigimonFilterOption?
-    private var digimonNotFoundView = DigimonNotFoundView()
 
     private struct Constants {
+        static let reuseIdentifier = "cell"
         static let sidesMargin: CGFloat = 15
     }
 
@@ -61,6 +63,15 @@ class MainViewController: UIViewController {
         return button
     }()
 
+    init(viewModel: MainViewViewModelProtocol) {
+        self.viewModel = viewModel
+        super.init()
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -100,7 +111,7 @@ class MainViewController: UIViewController {
     private func setupTableView() {
         stackView.addArrangedSubview(digimonTableView)
 
-        digimonTableView.register(DigimonTableViewCell.self, forCellReuseIdentifier: "cell")
+        digimonTableView.register(DigimonTableViewCell.self, forCellReuseIdentifier: MainViewController.Constants.reuseIdentifier)
         digimonTableView.delegate = self
         digimonTableView.dataSource = self
 
@@ -149,7 +160,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? DigimonTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: MainViewController.Constants.reuseIdentifier, for: indexPath) as? DigimonTableViewCell else {
             return UITableViewCell()
         }
 
@@ -164,7 +175,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-extension MainViewController: MainViewDelegate {
+extension MainViewController: MainViewModelDelegate {
     func showDigimons() {
         DispatchQueue.main.async {
             self.digimonTableView.reloadData()

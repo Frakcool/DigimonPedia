@@ -28,11 +28,11 @@ class CacheManager {
     }
 
     func getImage(_ imageURLString: String) -> NSData? {
-        if let imageFromDisk = getImageFromDisk(imageURLString) {
-            print("Image exists on disk \(imageURLString)")
-            return imageFromDisk
+        if let imageFromCoreData = getImageFromCoreData(imageURLString) {
+            print("Image exists on core data \(imageURLString)")
+            return imageFromCoreData
         } else if let imageFromCache = getImageFromCache(imageURLString) {
-            print("Image does not exist on disk, loading from NSCache \(imageURLString)")
+            print("Image does not exist on core data, loading from NSCache \(imageURLString)")
             self.saveToCoreData(imageFromCache, name: imageURLString as String)
             return imageFromCache
         }
@@ -40,8 +40,8 @@ class CacheManager {
         return nil
     }
 
-    private func getImageFromDisk(_ imageURLString: String) -> NSData? {
-        print("Retrieving from disk \(imageURLString)")
+    private func getImageFromCoreData(_ imageURLString: String) -> NSData? {
+        print("Retrieving from core data \(imageURLString)")
 
         return self.readFromCoreData(named: imageURLString)
     }
@@ -53,13 +53,13 @@ class CacheManager {
     }
 
     private func saveToCoreData(_ imageData: NSData, name: String) {
-        print("Saving to disk \(name)")
+        print("Saving to core data \(name)")
         let coreDataManager = CoreDataManager.shared
         coreDataManager.saveImageDataToCoreData(imageData, name: name)
     }
 
     private func readFromCoreData(named name: String) -> NSData? {
-        print("Reading from disk \(name)")
+        print("Reading from core data \(name)")
         let coreDataManager = CoreDataManager.shared
         return coreDataManager.getSavedImageData(named: name)
     }

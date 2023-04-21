@@ -97,9 +97,7 @@ class DigimonTableViewCell: UITableViewCell {
             return
         }
 
-        DispatchQueue.main.async {
-            self.digimonImage.image = UIImage(data: data)
-        }
+        self.digimonImage.image = UIImage(data: data)
     }
 
     private func setupTextStackView() {
@@ -131,7 +129,7 @@ class DigimonTableViewCell: UITableViewCell {
     }
 }
 
-extension DigimonTableViewCell: DigimonTableViewCellDelegate {
+extension DigimonTableViewCell: DigimonViewModelDelegate {
     func updateCellImage(_ image: Data?) {
         DispatchQueue.main.async {
             guard let image else {

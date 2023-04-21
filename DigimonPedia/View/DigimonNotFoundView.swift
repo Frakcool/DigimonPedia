@@ -8,6 +8,18 @@
 import UIKit
 
 class DigimonNotFoundView: UIView {
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        addSubview(imageView)
+        addSubview(label)
+        setupConstraints()
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     private let label: UILabel = {
         let label = UILabel()
         label.text = "Digimon not found"
@@ -28,14 +40,6 @@ class DigimonNotFoundView: UIView {
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
-
-    override func layoutSubviews() {
-        super.layoutSubviews()
-
-        addSubview(imageView)
-        addSubview(label)
-        setupConstraints()
-    }
 
     private func setupConstraints() {
         NSLayoutConstraint.activate([

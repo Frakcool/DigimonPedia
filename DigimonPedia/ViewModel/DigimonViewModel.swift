@@ -7,13 +7,13 @@
 
 import Foundation
 
-protocol DigimonTableViewCellDelegate {
+protocol DigimonViewModelDelegate: AnyObject {
     func updateCellImage(_ imageData: Data?)
 }
 
 class DigimonViewModel {
     var digimon: Digimon
-    var delegate: DigimonTableViewCellDelegate?
+    weak var delegate: DigimonViewModelDelegate?
     
     private let cacheManager = CacheManager.shared
     private var networkManager = NetworkManager()
