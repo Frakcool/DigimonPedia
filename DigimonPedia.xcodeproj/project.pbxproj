@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CD122E2629F31492006D3044 /* DigimonImage+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD122E2529F31492006D3044 /* DigimonImage+CoreDataProperties.swift */; };
 		CD24B5B6297F7D210030259A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD24B5B5297F7D210030259A /* AppDelegate.swift */; };
 		CD24B5BF297F7D230030259A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD24B5BE297F7D230030259A /* Assets.xcassets */; };
 		CD24B5CC297F7EA80030259A /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD24B5CB297F7EA80030259A /* MainViewController.swift */; };
@@ -25,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CD122E2529F31492006D3044 /* DigimonImage+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "DigimonImage+CoreDataProperties.swift"; path = "DigimonPedia/Model/DigimonImage+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		CD24B5B2297F7D210030259A /* DigimonPedia.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DigimonPedia.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD24B5B5297F7D210030259A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CD24B5BE297F7D230030259A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -58,6 +60,7 @@
 		CD24B5A9297F7D210030259A = {
 			isa = PBXGroup;
 			children = (
+				CD122E2529F31492006D3044 /* DigimonImage+CoreDataProperties.swift */,
 				CD24B5B4297F7D210030259A /* DigimonPedia */,
 				CD24B5B3297F7D210030259A /* Products */,
 			);
@@ -245,6 +248,7 @@
 				CDF99D6A2984E94A00F96828 /* DigimonNotFoundView.swift in Sources */,
 				CDF99D7129883F8800F96828 /* DigimonViewModel.swift in Sources */,
 				CDF99D6D2985C8AB00F96828 /* CacheManager.swift in Sources */,
+				CD122E2629F31492006D3044 /* DigimonImage+CoreDataProperties.swift in Sources */,
 				CDF99D642984885600F96828 /* NetworkManager.swift in Sources */,
 				CD24B5D1297F89200030259A /* Digimon.swift in Sources */,
 				CDF99D6229845AE800F96828 /* DigimonTableViewCell.swift in Sources */,

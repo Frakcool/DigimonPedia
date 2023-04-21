@@ -35,18 +35,25 @@ class CoreDataManager {
     }()
 
     func saveImageDataToCoreData(_ imageData: NSData, name: String) {
-        print("Saving image to core data")
-        let context = persistentContainer.viewContext
-        guard let entity = NSEntityDescription.entity(forEntityName: CoreDataManager.entityName, in: context) else {
+        guard getSavedImageData(named: name) == nil else {
+            print("Image already exists, skipping save")
             return
         }
-        let imageObject = NSManagedObject(entity: entity, insertInto: context)
-        imageObject.setValue(imageData, forKey: "imageData")
-        imageObject.setValue(name, forKey: "imageName")
 
-        saveContext()
+        DispatchQueue.global().async {
+            print("Saving image to core data")
+            let context = self.persistentContainer.viewContext
+            guard let entity = NSEntityDescription.entity(forEntityName: CoreDataManager.entityName, in: context) else {
+                return
+            }
+            let imageObject = NSManagedObject(entity: entity, insertInto: context)
+            imageObject.setValue(imageData, forKey: #keyPath(DigimonImage.imageData))
+            imageObject.setValue(name, forKey: #keyPath(DigimonImage.imageName))
 
-        print("Image saved to core data")
+            self.saveContext()
+
+            print("Image saved to core data")
+        }
     }
 
     func getSavedImageData(named name: String) -> NSData? {
@@ -61,7 +68,7 @@ class CoreDataManager {
             let result = try context.fetch(request)
             let imageObject = result.first as? NSManagedObject
             print("Image found in core data")
-            return imageObject?.value(forKey: "imageData") as? NSData
+            return imageObject?.value(forKey: #keyPath(DigimonImage.imageData)) as? NSData
         } catch let error as NSError {
             print("Could not fetch image. \(error), \(error.userInfo)")
             return nil
@@ -69,38 +76,42 @@ class CoreDataManager {
     }
 
     func deleteImageData(named name: String) {
-        print("Deleting image from core data")
+        DispatchQueue.global().async {
+            print("Deleting image from core data")
 
-        let context = persistentContainer.viewContext
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: CoreDataManager.entityName)
-        request.predicate = NSPredicate(format: "imageName == %@", name)
-        request.fetchLimit = 1
+            let context = self.persistentContainer.viewContext
+            let request = NSFetchRequest<NSFetchRequestResult>(entityName: CoreDataManager.entityName)
+            request.predicate = NSPredicate(format: "imageName == %@", name)
+            request.fetchLimit = 1
 
-        let deleteRequest = NSBatchDeleteRequest(fetchRequest: request)
+            let deleteRequest = NSBatchDeleteRequest(fetchRequest: request)
 
-        do {
-            try context.execute(deleteRequest)
-            try context.save()
-            print("Image deleted from core data")
-        } catch let error as NSError {
-            print("Could not delete image. \(error), \(error.userInfo)")
+            do {
+                try context.execute(deleteRequest)
+                try context.save()
+                print("Image deleted from core data")
+            } catch let error as NSError {
+                print("Could not delete image. \(error), \(error.userInfo)")
+            }
         }
     }
 
     func purgeCoreData() {
-        print("Purging core data")
+        DispatchQueue.global().async {
+            print("Purging core data")
 
-        let context = persistentContainer.viewContext
-        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: CoreDataManager.entityName)
-        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+            let context = self.persistentContainer.viewContext
+            let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: CoreDataManager.entityName)
+            let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
 
-        do {
-            try context.execute(deleteRequest)
-        } catch let error as NSError {
-            print("Could not purge code data. \(error), \(error.userInfo)")
+            do {
+                try context.execute(deleteRequest)
+            } catch let error as NSError {
+                print("Could not purge code data. \(error), \(error.userInfo)")
+            }
+
+            print("Purged Core Data")
         }
-
-        print("Purged Core Data")
     }
 
     func saveContext() {

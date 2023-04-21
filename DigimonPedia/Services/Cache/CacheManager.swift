@@ -33,7 +33,9 @@ class CacheManager {
             return imageFromCoreData
         } else if let imageFromCache = getImageFromCache(imageURLString) {
             print("Image does not exist on core data, loading from NSCache \(imageURLString)")
-            self.saveToCoreData(imageFromCache, name: imageURLString as String)
+            DispatchQueue.global().async {
+                self.saveToCoreData(imageFromCache, name: imageURLString as String)
+            }
             return imageFromCache
         }
         print("Image not in cache \(imageURLString)")
