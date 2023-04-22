@@ -7,10 +7,19 @@
 
 import Foundation
 
-class CacheManager {
-    static let shared = CacheManager()
+protocol PersistentCacheManager {
+    func saveImage(_ imageData: NSData, name: String)
+    func readImage(named name: String) -> NSData?
+    func deleteImage(named name: String)
+    func purgeCache()
+}
 
-    private init() {}
+class CacheManager {
+    private let persistentCacheManager: PersistentCacheManager
+
+    init(persistentCacheManager: PersistentCacheManager) {
+        self.persistentCacheManager = persistentCacheManager
+    }
 
     private let cache = NSCache<NSString, NSData>()
     private let serialQueue = DispatchQueue(label: "digimonCacheSerialQueue")
@@ -21,48 +30,39 @@ class CacheManager {
             print("Saving to cache \(imageURLString)")
             serialQueue.async {
                 self.cache.setObject(imageData, forKey: imageURLString)
-                self.saveToCoreData(imageData, name: imageURLString as String)
+                self.saveImageToPersistentCache(imageData, name: imageURLString as String)
                 print("Saved to cache \(imageURLString)")
             }
         }
     }
 
     func getImage(_ imageURLString: String) -> NSData? {
-        if let imageFromCoreData = getImageFromCoreData(imageURLString) {
-            print("Image exists on core data \(imageURLString)")
-            return imageFromCoreData
+        if let imageFromPersistentCache = getImageFromPersistentCache(imageURLString) {
+            print("Image exists on persistent cache")
+            return imageFromPersistentCache
         } else if let imageFromCache = getImageFromCache(imageURLString) {
             print("Image does not exist on core data, loading from NSCache \(imageURLString)")
             DispatchQueue.global().async {
-                self.saveToCoreData(imageFromCache, name: imageURLString as String)
+                self.saveImageToPersistentCache(imageFromCache, name: imageURLString as String)
             }
             return imageFromCache
         }
-        print("Image not in cache \(imageURLString)")
+        print("Image does not exist on cache")
         return nil
     }
 
-    private func getImageFromCoreData(_ imageURLString: String) -> NSData? {
-        print("Retrieving from core data \(imageURLString)")
+    private func getImageFromPersistentCache(_ imageURLString: String) -> NSData? {
+        print("Retrieving from persistent cache")
+        return persistentCacheManager.readImage(named: imageURLString)
+    }
 
-        return self.readFromCoreData(named: imageURLString)
+    private func saveImageToPersistentCache(_ imageData: NSData, name: String) {
+        persistentCacheManager.saveImage(imageData, name: name)
     }
 
     private func getImageFromCache(_ imageURLString: String) -> NSData? {
         print("Retrieving from cache \(imageURLString)")
 
         return self.cache.object(forKey: imageURLString as NSString)
-    }
-
-    private func saveToCoreData(_ imageData: NSData, name: String) {
-        print("Saving to core data \(name)")
-        let coreDataManager = CoreDataManager.shared
-        coreDataManager.saveImageDataToCoreData(imageData, name: name)
-    }
-
-    private func readFromCoreData(named name: String) -> NSData? {
-        print("Reading from core data \(name)")
-        let coreDataManager = CoreDataManager.shared
-        return coreDataManager.getSavedImageData(named: name)
     }
 }

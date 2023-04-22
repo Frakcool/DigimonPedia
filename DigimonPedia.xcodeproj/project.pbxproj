@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		CD122E2629F31492006D3044 /* DigimonImage+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD122E2529F31492006D3044 /* DigimonImage+CoreDataProperties.swift */; };
+		CD122E2929F31CB9006D3044 /* DigimonFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD122E2829F31CB9006D3044 /* DigimonFileManager.swift */; };
 		CD24B5B6297F7D210030259A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD24B5B5297F7D210030259A /* AppDelegate.swift */; };
 		CD24B5BF297F7D230030259A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD24B5BE297F7D230030259A /* Assets.xcassets */; };
 		CD24B5CC297F7EA80030259A /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD24B5CB297F7EA80030259A /* MainViewController.swift */; };
@@ -27,6 +28,7 @@
 
 /* Begin PBXFileReference section */
 		CD122E2529F31492006D3044 /* DigimonImage+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "DigimonImage+CoreDataProperties.swift"; path = "DigimonPedia/Model/DigimonImage+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		CD122E2829F31CB9006D3044 /* DigimonFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DigimonFileManager.swift; sourceTree = "<group>"; };
 		CD24B5B2297F7D210030259A /* DigimonPedia.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DigimonPedia.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD24B5B5297F7D210030259A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CD24B5BE297F7D230030259A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -134,18 +136,9 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		CD2ED02329B97649007FFA76 /* CoreData */ = {
-			isa = PBXGroup;
-			children = (
-				CD2ED02429B9767C007FFA76 /* CoreDataManager.swift */,
-			);
-			path = CoreData;
-			sourceTree = "<group>";
-		};
 		CDF99D652984B4AB00F96828 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				CD2ED02329B97649007FFA76 /* CoreData */,
 				CDF99D6B2985C89C00F96828 /* Cache */,
 				CD24B5C9297F7DD00030259A /* Network */,
 			);
@@ -155,7 +148,9 @@
 		CDF99D6B2985C89C00F96828 /* Cache */ = {
 			isa = PBXGroup;
 			children = (
+				CD2ED02429B9767C007FFA76 /* CoreDataManager.swift */,
 				CDF99D6C2985C8AB00F96828 /* CacheManager.swift */,
+				CD122E2829F31CB9006D3044 /* DigimonFileManager.swift */,
 			);
 			path = Cache;
 			sourceTree = "<group>";
@@ -239,6 +234,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD122E2929F31CB9006D3044 /* DigimonFileManager.swift in Sources */,
 				CD92BBC629B98FB60057215E /* DigimonCoreDataModel.xcdatamodeld in Sources */,
 				CD24B5B6297F7D210030259A /* AppDelegate.swift in Sources */,
 				CD92BBC429B989410057215E /* DigimonImage+CoreDataProperties.swift in Sources */,

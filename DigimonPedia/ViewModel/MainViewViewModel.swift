@@ -13,23 +13,27 @@ protocol MainViewModelDelegate: AnyObject {
 }
 
 protocol MainViewViewModelProtocol: AnyObject {
+    var persistentCacheManager: PersistentCacheManager { get set }
     var digimons: [Digimon] { get set }
     var delegate: MainViewModelDelegate? { get set }
 
     func getAllDigimon() async
     func getDigimonsFilteredBy(name: String) async
     func getDigimonsFilteredBy(level: String) async
-    func purgeCoreData()
+    func purgeCache()
 }
 
 class MainViewViewModel: MainViewViewModelProtocol {
     private let networkManager: NetworkManager?
 
+    var persistentCacheManager: PersistentCacheManager
     var digimons: [Digimon] = []
+    
     weak var delegate: MainViewModelDelegate?
 
-    init() {
+    init(persistentCacheManager: PersistentCacheManager) {
         networkManager = NetworkManager()
+        self.persistentCacheManager = persistentCacheManager
     }
 
     private lazy var updateDigimons: (([Digimon]?, Error?) -> Void) = { digimons, error in
@@ -72,8 +76,8 @@ class MainViewViewModel: MainViewViewModelProtocol {
         }
     }
 
-    func purgeCoreData() {
-        print("About to purge Core Data")
-        CoreDataManager.shared.purgeCoreData()
+    func purgeCache() {
+        print("About to purge cache")
+        persistentCacheManager.purgeCache()
     }
 }

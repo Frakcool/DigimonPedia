@@ -13,8 +13,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         let _ = CoreDataManager.shared.persistentContainer
+
+        let persistentCacheManager: PersistentCacheManager = DigimonFileManager.shared
+        let viewModel = MainViewViewModel(persistentCacheManager: persistentCacheManager)
+
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = MainViewController(viewModel: MainViewViewModel())
+        window?.rootViewController = MainViewController(viewModel: viewModel)
         window?.makeKeyAndVisible()
 
         return true

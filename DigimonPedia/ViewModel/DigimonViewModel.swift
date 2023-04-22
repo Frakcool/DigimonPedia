@@ -15,11 +15,14 @@ class DigimonViewModel {
     var digimon: Digimon
     weak var delegate: DigimonViewModelDelegate?
     
-    private let cacheManager = CacheManager.shared
+    private let cacheManager: CacheManager
     private var networkManager = NetworkManager()
+    private let persistentCacheManager: PersistentCacheManager
 
-    init(digimon: Digimon) {
+    init(digimon: Digimon, persistentCacheManager: PersistentCacheManager) {
         self.digimon = digimon
+        self.persistentCacheManager = persistentCacheManager
+        cacheManager = CacheManager(persistentCacheManager: persistentCacheManager)
     }
 
     func fetchImage() async -> Data? {
@@ -40,6 +43,7 @@ class DigimonViewModel {
     }
 
     private func loadFromAPI(from imageURLString: String) async -> Data? {
+        print("Load from API")
         do {
             let data = try await networkManager.getImage(from: imageURLString)
             self.cacheManager.insertImage(imageURLString as NSString, imageData: data as NSData)

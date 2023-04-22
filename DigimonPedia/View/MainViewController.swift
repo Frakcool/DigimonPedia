@@ -56,7 +56,7 @@ class MainViewController: UIViewController {
 
     private let purgeCoreDataButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Purge Core Data", for: .normal)
+        button.setTitle("Purge Cache", for: .normal)
         button.setTitleColor(.red, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
 
@@ -65,7 +65,7 @@ class MainViewController: UIViewController {
 
     init(viewModel: MainViewViewModelProtocol) {
         self.viewModel = viewModel
-        super.init()
+        super.init(nibName: nil, bundle: nil)
     }
 
     required init?(coder: NSCoder) {
@@ -137,7 +137,7 @@ class MainViewController: UIViewController {
     }
 
     @objc private func purgeButtonPressed() {
-        viewModel.purgeCoreData()
+        viewModel.purgeCache()
     }
 
     private func getAllDigimon() async {
@@ -164,7 +164,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()
         }
 
-        let digimonViewModel = DigimonViewModel(digimon: viewModel.digimons[indexPath.row])
+        let digimonViewModel = DigimonViewModel(digimon: viewModel.digimons[indexPath.row], persistentCacheManager: viewModel.persistentCacheManager)
         cell.configureCell(with: digimonViewModel)
         
         return cell
