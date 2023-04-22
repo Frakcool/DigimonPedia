@@ -9,6 +9,21 @@ import CoreData
 import UIKit
 
 class CoreDataManager: PersistentCacheManager {
+    private static let entityName = "DigimonImage"
+    private static let containerName = "DigimonCoreDataModel"
+
+    static let shared = CoreDataManager()
+
+    private init() {
+        let path = NSPersistentContainer
+            .defaultDirectoryURL()
+            .absoluteString
+            .replacingOccurrences(of: "file://", with: "")
+            .removingPercentEncoding
+
+        print(path ?? "Not found")
+    }
+
     func saveImage(_ imageData: NSData, name: String) {
         guard readImage(named: name) == nil else {
             print("Image already exists, skipping save")
@@ -87,21 +102,6 @@ class CoreDataManager: PersistentCacheManager {
 
             print("Purged Core Data")
         }
-    }
-
-    private static let entityName = "DigimonImage"
-    private static let containerName = "DigimonCoreDataModel"
-
-    static let shared = CoreDataManager()
-
-    private init() {
-        let path = NSPersistentContainer
-            .defaultDirectoryURL()
-            .absoluteString
-            .replacingOccurrences(of: "file://", with: "")
-            .removingPercentEncoding
-
-        print(path ?? "Not found")
     }
 
     lazy var persistentContainer: NSPersistentContainer = {

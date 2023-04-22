@@ -20,5 +20,53 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "37F71D39-80ED-486D-8958-AADE6708B730"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DigimonPedia/Services/Cache/CoreDataManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
+            landmarkName = "saveImage(_:name:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "37F71D39-80ED-486D-8958-AADE6708B730 - 68f898ab88523f55"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "DigimonPedia.CoreDataManager.saveImage(_: __C.NSData, name: Swift.String) -&gt; ()"
+                  moduleName = "DigimonPedia"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jfsanchez/projects/DigimonPedia/DigimonPedia/Services/Cache/CoreDataManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "33"
+                  endingLineNumber = "33"
+                  offsetFromSymbolStart = "392">
+               </Location>
+               <Location
+                  uuid = "37F71D39-80ED-486D-8958-AADE6708B730 - 2372bc4aa79f79d5"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in DigimonPedia.CoreDataManager.saveImage(_: __C.NSData, name: Swift.String) -&gt; ()"
+                  moduleName = "DigimonPedia"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jfsanchez/projects/DigimonPedia/DigimonPedia/Services/Cache/CoreDataManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "34"
+                  endingLineNumber = "34"
+                  offsetFromSymbolStart = "112">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

@@ -1,0 +1,29 @@
+{
+  "configurations" : [
+    {
+      "id" : "82A11877-FB40-44FD-809C-24B367AA0697",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:DigimonPedia.xcodeproj",
+      "identifier" : "CD24B5B1297F7D210030259A",
+      "name" : "DigimonPedia"
+    }
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:DigimonPedia.xcodeproj",
+        "identifier" : "CD122E3229F37BA0006D3044",
+        "name" : "DigimonPediaTests"
+      }
+    }
+  ],
+  "version" : 1
+}

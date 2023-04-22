@@ -9,7 +9,6 @@
 import Foundation
 import CoreData
 
-
 extension DigimonImage {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<DigimonImage> {

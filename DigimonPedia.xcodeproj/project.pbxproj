@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		CD122E2629F31492006D3044 /* DigimonImage+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD122E2529F31492006D3044 /* DigimonImage+CoreDataProperties.swift */; };
 		CD122E2929F31CB9006D3044 /* DigimonFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD122E2829F31CB9006D3044 /* DigimonFileManager.swift */; };
+		CD122E3C29F37BA8006D3044 /* CoreDataManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD122E2D29F37B72006D3044 /* CoreDataManagerTests.swift */; };
 		CD24B5B6297F7D210030259A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD24B5B5297F7D210030259A /* AppDelegate.swift */; };
 		CD24B5BF297F7D230030259A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD24B5BE297F7D230030259A /* Assets.xcassets */; };
 		CD24B5CC297F7EA80030259A /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD24B5CB297F7EA80030259A /* MainViewController.swift */; };
@@ -26,9 +27,22 @@
 		CDF99D7129883F8800F96828 /* DigimonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF99D7029883F8800F96828 /* DigimonViewModel.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		CD122E3729F37BA1006D3044 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CD24B5AA297F7D210030259A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CD24B5B1297F7D210030259A;
+			remoteInfo = DigimonPedia;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
-		CD122E2529F31492006D3044 /* DigimonImage+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "DigimonImage+CoreDataProperties.swift"; path = "DigimonPedia/Model/DigimonImage+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		CD122E2529F31492006D3044 /* DigimonImage+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DigimonImage+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		CD122E2829F31CB9006D3044 /* DigimonFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DigimonFileManager.swift; sourceTree = "<group>"; };
+		CD122E2D29F37B72006D3044 /* CoreDataManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManagerTests.swift; sourceTree = "<group>"; };
+		CD122E3329F37BA0006D3044 /* DigimonPediaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DigimonPediaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD122E3D29F382DC006D3044 /* DigimonPedia.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = DigimonPedia.xctestplan; sourceTree = "<group>"; };
 		CD24B5B2297F7D210030259A /* DigimonPedia.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DigimonPedia.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD24B5B5297F7D210030259A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CD24B5BE297F7D230030259A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -49,6 +63,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		CD122E3029F37BA0006D3044 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CD24B5AF297F7D210030259A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -59,11 +80,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CD122E3429F37BA0006D3044 /* DigimonPediaTests */ = {
+			isa = PBXGroup;
+			children = (
+				CD122E2D29F37B72006D3044 /* CoreDataManagerTests.swift */,
+			);
+			path = DigimonPediaTests;
+			sourceTree = "<group>";
+		};
 		CD24B5A9297F7D210030259A = {
 			isa = PBXGroup;
 			children = (
-				CD122E2529F31492006D3044 /* DigimonImage+CoreDataProperties.swift */,
+				CD122E3D29F382DC006D3044 /* DigimonPedia.xctestplan */,
 				CD24B5B4297F7D210030259A /* DigimonPedia */,
+				CD122E3429F37BA0006D3044 /* DigimonPediaTests */,
 				CD24B5B3297F7D210030259A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -72,6 +102,7 @@
 			isa = PBXGroup;
 			children = (
 				CD24B5B2297F7D210030259A /* DigimonPedia.app */,
+				CD122E3329F37BA0006D3044 /* DigimonPediaTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -100,6 +131,7 @@
 		CD24B5CA297F7E210030259A /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				CD122E2529F31492006D3044 /* DigimonImage+CoreDataProperties.swift */,
 				CD92BBC129B989410057215E /* DigimonImage+CoreDataClass.swift */,
 				CD92BBC229B989410057215E /* DigimonImage+CoreDataProperties.swift */,
 				CD24B5D0297F89200030259A /* Digimon.swift */,
@@ -167,6 +199,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		CD122E3229F37BA0006D3044 /* DigimonPediaTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CD122E3929F37BA1006D3044 /* Build configuration list for PBXNativeTarget "DigimonPediaTests" */;
+			buildPhases = (
+				CD122E2F29F37BA0006D3044 /* Sources */,
+				CD122E3029F37BA0006D3044 /* Frameworks */,
+				CD122E3129F37BA0006D3044 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CD122E3829F37BA1006D3044 /* PBXTargetDependency */,
+			);
+			name = DigimonPediaTests;
+			productName = DigimonPediaTests;
+			productReference = CD122E3329F37BA0006D3044 /* DigimonPediaTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		CD24B5B1297F7D210030259A /* DigimonPedia */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = CD24B5C6297F7D230030259A /* Build configuration list for PBXNativeTarget "DigimonPedia" */;
@@ -191,9 +241,13 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1420;
+				LastSwiftUpdateCheck = 1430;
 				LastUpgradeCheck = 1420;
 				TargetAttributes = {
+					CD122E3229F37BA0006D3044 = {
+						CreatedOnToolsVersion = 14.3;
+						TestTargetID = CD24B5B1297F7D210030259A;
+					};
 					CD24B5B1297F7D210030259A = {
 						CreatedOnToolsVersion = 14.2;
 					};
@@ -213,11 +267,19 @@
 			projectRoot = "";
 			targets = (
 				CD24B5B1297F7D210030259A /* DigimonPedia */,
+				CD122E3229F37BA0006D3044 /* DigimonPediaTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		CD122E3129F37BA0006D3044 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CD24B5B0297F7D210030259A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -230,6 +292,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		CD122E2F29F37BA0006D3044 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CD122E3C29F37BA8006D3044 /* CoreDataManagerTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CD24B5AE297F7D210030259A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -254,7 +324,53 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		CD122E3829F37BA1006D3044 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CD24B5B1297F7D210030259A /* DigimonPedia */;
+			targetProxy = CD122E3729F37BA1006D3044 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		CD122E3A29F37BA1006D3044 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = RXXCFAT5XN;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.msft.frakcool.DigimonPediaTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DigimonPedia.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/DigimonPedia";
+			};
+			name = Debug;
+		};
+		CD122E3B29F37BA1006D3044 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = RXXCFAT5XN;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.msft.frakcool.DigimonPediaTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DigimonPedia.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/DigimonPedia";
+			};
+			name = Release;
+		};
 		CD24B5C4297F7D230030259A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -423,6 +539,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		CD122E3929F37BA1006D3044 /* Build configuration list for PBXNativeTarget "DigimonPediaTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CD122E3A29F37BA1006D3044 /* Debug */,
+				CD122E3B29F37BA1006D3044 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		CD24B5AD297F7D210030259A /* Build configuration list for PBXProject "DigimonPedia" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
